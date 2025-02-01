@@ -37,17 +37,40 @@ model = genai.GenerativeModel(
 
 class GenerateScript:
     def __init__(self):
+        self.history = []
+        self.chat_session = model.start_chat(history=self.history)
         self.niche = ""
 
     def generate_ideas(self):
         console.print(f"Menemukan ide untuk niche: {self.niche}")
 
-        # Prompt to generate
-        prompt_ideas = f"MBerikan 5 ide prompt untuk niche {self.niche}"
+        # Prompt to generate Ideas
+        prompt = f"""
+        Berdasarkan niche {self.niche}), buatkan 5 ide video yang menarik dan sangat mungkin viral. Setiap ide harus memiliki:
 
-        response = model.generate_content(prompt_ideas)
-        markdown = Markdown(response.text)
-        console.print(markdown)
+        Judul yang menarik (mengandung kata kunci dan memicu rasa penasaran).
+
+        Deskripsi singkat (1-2 kalimat yang menjelaskan isi video).
+
+        Target audiens (usia anak-anak yang dituju).
+
+        Nilai tambah (apa yang akan dipelajari atau didapatkan oleh penonton).
+
+        Pastikan ide video tersebut belum banyak dibahas oleh kompetitor dan memiliki potensi viral.
+        """
+        try:
+            response = self.chat_session.send_message(prompt)
+
+            markdown = Markdown(response.text)
+            console.print(markdown)
+
+            model_response = response.text
+            self.history.append({"role": "user", "parts": [prompt]})
+            self.history.append({"role": "model", "parts": [model_response]})
+
+            console.print(model_response)
+        except Exception as e:
+            print(f"Terjadi kesalahan di generate_ideas: {e}")
 
     def generate_script(self, niche: str):
         self.niche = niche
