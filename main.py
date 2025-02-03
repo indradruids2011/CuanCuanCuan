@@ -6,11 +6,10 @@ console = Console()
 
 
 def main():
-    console.print("Aplikasi Generate Video Sederhana")
-    niche = input("Masukkan niche video yang ingin dibuat: ")
+    console.print("Aplikasi Automatisasi Video YouTube Sederhana")
 
     script = GenerateScript()
-    script.generate_script(niche=niche)
+    script.generate_script()
 
 
 if __name__ == "__main__":
