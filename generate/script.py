@@ -47,6 +47,7 @@ class GenerateScript:
         self.deskripsi = ""
         self.durasi = ""
         self.jumlah_scene = ""
+        self.style = ""
 
     def Ai(self, prompt):
         self.add_messages("user", prompt)
@@ -129,6 +130,7 @@ class GenerateScript:
 
                     self.durasi = input("Masukkan durasi video: ")
                     self.jumlah_scene = input("Masukkan jumlah scene: ")
+                    self.style = input("Masukkan style: ")
 
                     self.generate_script_video(pilihan + 1)
 
@@ -141,7 +143,7 @@ class GenerateScript:
 
         # Prompt to generate Script
         prompt = f"""
-        Berdasarkan nomor {pilihan}, buatkan sebuah script video untuk YouTube Shorts dan TikTok yang menarik, kreatif, inovatif, edukatif, serta mudah di mengerti dan sangat mungkin viral untuk audiens {self.durasi} dengan jumlah scene {self.jumlah_scene}. 
+        Berdasarkan nomor {pilihan}, buatkan sebuah script video untuk YouTube Shorts dan TikTok yang menarik, kreatif, inovatif, edukatif, serta mudah di mengerti dan sangat mungkin viral untuk audiens {self.durasi} dengan jumlah scene {self.jumlah_scene}.
         
         Script harus memperhatikan hal-hal dibawah ini:
         1. Kenali Audiens Anda
@@ -172,11 +174,11 @@ class GenerateScript:
         1. Durasi
             Durasi harus sesuai dengan durasi video. Memperlihatkan dari detik ke detik.
         2. Visual
-            Visual harus menggambarkan secara detail dari tiap scene. visual Hanya berupa gambar yang sesuai dengan scene yang telah ditentukan dan bisa terdiri dari beberapa visual yang menggambarkan scene. Hindari visual yang terlalu berlebih dan melenceng dari scene. Berikan visual dalam bentuk ilustrasi terbaik, sesuai dengan detail scene.
+            Visual harus menggambarkan secara detail dari tiap scene. visual hanya berupa gambar yang sesuai dengan scene yang telah ditentukan dan bisa terdiri dari beberapa visual yang menggambarkan scene. Visual hanya berupa gambar static. Berikan visual dalam bentuk {self.style} terbaik, sesuai dengan detail scene.
         3. Narasi
             Panjang narasi harus menyesuaikan dengan durasi scene, harus sesuai dengan detail scene, dan sesuaikan waktu narasi dengan waktu scene. buat dengan sangat detail.
         4. Prompt text to image
-            Prompt text to image harus sesuai dengan seluruh scene visual. Prompt ini menjelaskan gambar dengan sangat detail, berupa subject ilustrasi, detail background yang sesuai dengan scene, serta tambahan beberapa ornamen menarik sesuai dengan scene. buatkan image dalam bentuk ilustrasi 3d, atau ilustrasi 4d yang sesuai dengan detail setiap scene.
+            Prompt text to image harus sesuai dengan visual dalam scene, BILA VISUAL MENGANDUNG TEKS JANGAN JADIKAN SEBUAH PROMPT. Prompt ini berupa subject, background detail yang sesuai dengan visual dan style berupa {self.style}. Untuk CTA tidak diperlukan prompt.
         5. Text in screen
             buatkan text sesuai dengan detail narasi per scene atau sesuai dengan isi narasi per secene. buatkan dalam font yang sesuai dengan scene, berikan sedikit efek agar tulisan lebih menarik untuk dibaca oleh audience. Jika perlu, berikan huruf kapital dalam salah satu kalimat jika terdapat kalimat yang mengandung unsur edukasi.
         
